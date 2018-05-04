@@ -18,6 +18,9 @@ public class Item {
 
     private Integer price;
 
+    @NotNull(message="image is required")
+    private String imgUrl;
+
     @OneToOne()
     private User user;
 
@@ -51,6 +54,14 @@ public class Item {
         this.price = price;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public User getUser() {
         return user;
     }
@@ -65,6 +76,7 @@ public class Item {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
+                ", imgUrl='" + imgUrl + '\'' +
                 ", user=" + user +
                 '}';
     }

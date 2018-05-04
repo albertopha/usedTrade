@@ -22,7 +22,12 @@ public class User {
     private Long id;
 
     @NotNull(message="name cannot be null")
-    private String name;
+    private String firstName;
+
+    @NotNull (message="Last name cannot be null")
+    private String lastName;
+
+    private String middleName;
 
     @NotNull(message="age is required")
     @Min(value=18, message="user needs to be at least 18")
@@ -41,11 +46,16 @@ public class User {
     @OneToMany(cascade=CascadeType.REMOVE)
     private List<Post> posts;
 
-    public User(@NotNull(message = "name cannot be null") String name, @NotNull(message = "age is required")
-    @Min(value = 18, message = "user needs to be at least 18") Integer age,
+    public User(@NotNull(message = "name cannot be null") String firstName,
+                @NotNull(message = "Last name cannot be null") String lastName,
+                String middleName, @NotNull(message = "age is required")
+                @Min(value = 18, message = "user needs to be at least 18") Integer age,
                 @NotNull(message = "credit card information is required") String creditCard,
-                @Email String email, String dateOfBirth, List<Post> posts) {
-        this.name = name;
+                @Email String email, @NotNull(message = "date of birth required") String dateOfBirth,
+                List<Post> posts) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
         this.age = age;
         this.creditCard = creditCard;
         this.email = email;
@@ -61,12 +71,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public Integer getAge() {
@@ -113,7 +139,9 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
                 ", age=" + age +
                 ", creditCard='" + creditCard + '\'' +
                 ", email='" + email + '\'' +
