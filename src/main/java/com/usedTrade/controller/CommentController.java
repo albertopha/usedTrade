@@ -22,9 +22,16 @@ public class CommentController {
         return commentService.getAllComments();
     }
 
+    // GET comments from postId
     @RequestMapping(value="/post", method=RequestMethod.GET)
     public List<Comment> getCommentsByPost(@RequestParam("postId") long postId) {
         return commentService.getCommentsByPost(postId);
+    }
+
+    // GET comments from userId
+    @RequestMapping(value="/user", method=RequestMethod.GET)
+    public List<Comment> getCommentsByUser(@RequestParam("userId") long userId) {
+        return commentService.getCommentsByUser(userId);
     }
 
 }
