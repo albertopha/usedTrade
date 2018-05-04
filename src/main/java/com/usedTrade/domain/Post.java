@@ -34,6 +34,9 @@ public class Post {
     @JoinColumn(name="fk_post")
     private List<Comment> comments = new ArrayList<Comment>(); //TODO: is this required?
 
+    @ManyToOne
+    private User user;
+
     protected Post() {
 
     }
