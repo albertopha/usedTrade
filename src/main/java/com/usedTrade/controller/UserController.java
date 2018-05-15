@@ -4,6 +4,7 @@ import com.usedTrade.domain.User;
 import com.usedTrade.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,9 +49,13 @@ public class UserController {
 
     // GET users by date of birth
     @RequestMapping(value="/dob", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<User> getUsersByDateOfBirth(@PathVariable("dob") String dob) {
+    public List<User> getUsersByDateOfBirth(@RequestParam("dob") String dob) {
         return userService.getUsersByDateOfBirth(dob);
     }
 
+    // POST user
+    @RequestMapping(value="/user", method=RequestMethod.POST)
+    public ResponseEntity<User> postUser(@RequestBody User user) {
 
+    }
 }

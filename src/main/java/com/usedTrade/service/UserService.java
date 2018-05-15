@@ -70,7 +70,7 @@ public class UserService {
 
     public List<User> getUsersByDateOfBirth(String dob) {
         if(dob.length() == 0 || dob.length() > 8) return null;
-        return usersRepository.findBydateOfBirth(dob);
+        return usersRepository.findByDateOfBirth(dob);
     }
 
 
