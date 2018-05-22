@@ -15,9 +15,11 @@ public class Comment {
     private String text;
 
     @ManyToOne
+    @JoinColumn(name = "fk_user")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "fk_post")
     private Post post;
 
     protected Comment(){}

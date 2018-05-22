@@ -1,5 +1,6 @@
 package com.usedTrade.domain;
 
+import org.hibernate.annotations.OnDelete;
 import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -44,12 +45,10 @@ public class User {
     @NotNull(message="date of birth required")
     private String dateOfBirth;
 
-    @OneToMany(cascade=CascadeType.REMOVE)
-    @JoinColumn(name = "fk_user")
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "fk_user")
     private List<Post> posts = new ArrayList<Post>(); //TODO: is this required?
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "fk_user")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_user")
     private List<Comment> comments = new ArrayList<Comment>(); //TODO: is this reuqired?
 
     protected User() {

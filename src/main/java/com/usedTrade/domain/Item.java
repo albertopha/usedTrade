@@ -25,7 +25,7 @@ public class Item {
     @NotNull(message="image is required")
     private String imgUrl;
 
-    @ManyToOne()
+    @OneToOne
     private Post post;
 
     protected Item() {

@@ -22,31 +22,21 @@ public class Post {
     @NotNull(message="post should contain date")
     private String postedDate;
 
-    @OneToMany
-    @JoinColumn(name="fk_post")
+    @OneToMany (mappedBy = "fk_post")
     private List<Tag> tags;
 
-    @OneToMany
-    @JoinColumn(name="fk_post")
+    @OneToOne
     private Item item;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name="fk_post")
-    private List<Comment> comments = new ArrayList<Comment>(); //TODO: is this required?
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_post")
+    private List<Comment> comments;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_user")
     private User user;
 
     protected Post() {
 
-    }
-
-    public Post(@NotNull(message = "post should have title") String title, @NotNull(message = "post should contain date") String postedDate, List<Tag> tags, Item item, List<Comment> comments) {
-        this.title = title;
-        this.postedDate = postedDate;
-        this.tags = tags;
-        this.item = item;
-        this.comments = comments;
     }
 
     public Long getId() {
@@ -97,15 +87,13 @@ public class Post {
         this.comments = comments;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", postedDate='" + postedDate + '\'' +
-                ", tags=" + tags +
-                ", item=" + item +
-                ", comments=" + comments +
-                '}';
+    public User getUser() {
+        return user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 }

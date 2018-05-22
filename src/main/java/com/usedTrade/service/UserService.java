@@ -1,6 +1,8 @@
 package com.usedTrade.service;
 
+import com.usedTrade.domain.Post;
 import com.usedTrade.domain.User;
+import com.usedTrade.repository.PostRepository;
 import com.usedTrade.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private PostRepository postRepository;
 
     public List<User> getUsers() {
         return usersRepository.findAll();
@@ -90,5 +95,12 @@ public class UserService {
     public void deleteUser(long userId) {
         User user = userById(userId);
         usersRepository.delete(user);
+    }
+
+    public User findUserUsingPostId(long postId) {
+        Optional<Post> post = postRepository.findById(postId);
+
+        User user = post.get().getUser();
+        return user;
     }
 }

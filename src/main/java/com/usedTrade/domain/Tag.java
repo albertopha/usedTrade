@@ -13,6 +13,7 @@ public class Tag {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "fk_post")
     private Post post;
 
     protected Tag() {

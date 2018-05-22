@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
 
 @RestController
 @RequestMapping(path="/users")
@@ -107,4 +105,10 @@ public class UserController {
     public void delete(@PathVariable("userId") long userId) {
         userService.deleteUser(userId);
     }
+
+    @RequestMapping(value="/post/{postId}", method=RequestMethod.GET)
+    public User findUserByPostId(@PathVariable("postId") long postId) {
+        return userService.findUserUsingPostId(postId);
+    }
+
 }
