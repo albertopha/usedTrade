@@ -73,5 +73,22 @@ public class UserService {
         return usersRepository.findByDateOfBirth(dob);
     }
 
+    public User postUser(String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
+        return new User(fn, ln, mn, age, creditCard, email, dob, null, null);
+    }
 
+    public void updateUser(User user, String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
+        if(fn != "") user.setFirstName(fn);
+        if(ln != "") user.setLastName(ln);
+        if(mn != "") user.setMiddleName(mn);
+        if(age != -1) user.setAge(age);
+        if(creditCard != "") user.setCreditCard(creditCard);
+        if(email != "") user.setEmail(email);
+        if(dob != "") user.setDateOfBirth(dob);
+    }
+
+    public void deleteUser(long userId) {
+        User user = userById(userId);
+        usersRepository.delete(user);
+    }
 }
