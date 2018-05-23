@@ -1,6 +1,10 @@
 package com.usedTrade.service;
 
+import com.usedTrade.domain.Comment;
+import com.usedTrade.domain.Post;
 import com.usedTrade.domain.User;
+import com.usedTrade.repository.CommentRepository;
+import com.usedTrade.repository.PostRepository;
 import com.usedTrade.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,12 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     public List<User> getUsers() {
         return usersRepository.findAll();
@@ -70,8 +80,39 @@ public class UserService {
 
     public List<User> getUsersByDateOfBirth(String dob) {
         if(dob.length() == 0 || dob.length() > 8) return null;
-        return usersRepository.findBydateOfBirth(dob);
+        return usersRepository.findByDateOfBirth(dob);
     }
 
+    public User postUser(String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
+        return new User(fn, ln, mn, age, creditCard, email, dob, null, null);
+    }
 
+    public void updateUser(User user, String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
+        if(fn != "") user.setFirstName(fn);
+        if(ln != "") user.setLastName(ln);
+        if(mn != "") user.setMiddleName(mn);
+        if(age != -1) user.setAge(age);
+        if(creditCard != "") user.setCreditCard(creditCard);
+        if(email != "") user.setEmail(email);
+        if(dob != "") user.setDateOfBirth(dob);
+    }
+
+    public void deleteUser(long userId) {
+        User user = userById(userId);
+        usersRepository.delete(user);
+    }
+
+    public User findUserUsingPostId(long postId) {
+        Optional<Post> post = postRepository.findById(postId);
+
+        User user = post.get().getUser();
+        return user;
+    }
+
+    public User findUserUsingCommentId(long commentId) {
+        Optional<Comment> comment = commentRepository.findById(commentId);
+
+        User user = comment.get().getUser();
+        return user;
+    }
 }

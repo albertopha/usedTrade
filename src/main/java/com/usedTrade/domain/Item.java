@@ -1,6 +1,7 @@
 package com.usedTrade.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,16 +19,26 @@ public class Item {
 
     private Integer price;
 
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private Integer quantity;
+
     @NotNull(message="image is required")
     private String imgUrl;
 
-    @OneToOne()
-    private User user;
+    @OneToOne (cascade = CascadeType.REMOVE)
+    @JoinColumn (name = "fk_post")
+    private Post post;
 
-    public Item(@NotNull(message = "name of the item is required") String name, Integer price, User user) {
+    protected Item() {
+
+    }
+
+    public Item(@NotNull(message = "name of the item is required") String name, Integer price, Integer quantity, @NotNull(message = "image is required") String imgUrl, Post post) {
         this.name = name;
         this.price = price;
-        this.user = user;
+        this.quantity = quantity;
+        this.imgUrl = imgUrl;
+        this.post = post;
     }
 
     public Long getId() {
@@ -54,6 +65,14 @@ public class Item {
         this.price = price;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     public String getImgUrl() {
         return imgUrl;
     }
@@ -62,12 +81,12 @@ public class Item {
         this.imgUrl = imgUrl;
     }
 
-    public User getUser() {
-        return user;
+    public Post getPost() {
+        return post;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @Override
@@ -76,8 +95,9 @@ public class Item {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
+                ", quantity=" + quantity +
                 ", imgUrl='" + imgUrl + '\'' +
-                ", user=" + user +
+                ", post=" + post +
                 '}';
     }
 }

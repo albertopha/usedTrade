@@ -1,5 +1,6 @@
 package com.usedTrade.domain;
 
+import org.hibernate.annotations.OnDelete;
 import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,8 +45,15 @@ public class User {
     @NotNull(message="date of birth required")
     private String dateOfBirth;
 
-    @OneToMany(cascade=CascadeType.REMOVE)
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "fk_user")
     private List<Post> posts;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_user")
+    private List<Comment> comments;
+
+    protected User() {
+
+    }
 
     public User(@NotNull(message = "name cannot be null") String firstName,
                 @NotNull(message = "Last name cannot be null") String lastName,
@@ -52,7 +61,7 @@ public class User {
                 @Min(value = 18, message = "user needs to be at least 18") Integer age,
                 @NotNull(message = "credit card information is required") String creditCard,
                 @Email String email, @NotNull(message = "date of birth required") String dateOfBirth,
-                List<Post> posts) {
+                List<Post> posts, List<Comment> comments) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -61,6 +70,7 @@ public class User {
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.posts = posts;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -135,6 +145,14 @@ public class User {
         this.posts = posts;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -147,6 +165,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", posts=" + posts +
+                ", comments=" + comments +
                 '}';
     }
 }

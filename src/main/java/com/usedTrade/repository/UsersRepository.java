@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public interface UsersRepository extends JpaRepository<User, Long> {
-    public List<User> findByFirstName(String name);
-    public List<User> findByLastName(String name);
-    public List<User> findBydateOfBirth(String bd);
+    List<User> findByFirstName(String name);
+    List<User> findByLastName(String name);
+    List<User> findByDateOfBirth(String bd);
 }
