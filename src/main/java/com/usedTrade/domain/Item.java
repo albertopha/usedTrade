@@ -25,7 +25,8 @@ public class Item {
     @NotNull(message="image is required")
     private String imgUrl;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.REMOVE)
+    @JoinColumn (name = "fk_post")
     private Post post;
 
     protected Item() {

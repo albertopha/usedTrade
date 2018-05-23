@@ -2,9 +2,7 @@ package com.usedTrade.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
-import com.usedTrade.domain.Tag;
 
 /**
  * Created by albertoh on 2018-05-01.
@@ -22,10 +20,12 @@ public class Post {
     @NotNull(message="post should contain date")
     private String postedDate;
 
-    @OneToMany (mappedBy = "fk_post")
+    private String content;
+
+    @OneToMany (mappedBy = "fk_post", fetch = FetchType.EAGER)
     private List<Tag> tags;
 
-    @OneToOne
+    @OneToOne (mappedBy = "fk_post")
     private Item item;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_post")
@@ -63,6 +63,10 @@ public class Post {
         this.postedDate = postedDate;
     }
 
+    public String getContent() { return content; }
+
+    public void setContent(String content) { this.content = content; }
+
     public List<Tag> getTags() {
         return tags;
     }
@@ -95,5 +99,17 @@ public class Post {
         this.user = user;
     }
 
-
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", postedDate='" + postedDate + '\'' +
+                ", content='" + content + '\'' +
+                ", tags=" + tags +
+                ", item=" + item +
+                ", comments=" + comments +
+                ", user=" + user +
+                '}';
+    }
 }
