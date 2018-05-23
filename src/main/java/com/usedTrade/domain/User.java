@@ -46,10 +46,10 @@ public class User {
     private String dateOfBirth;
 
     @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "fk_user")
-    private List<Post> posts = new ArrayList<Post>(); //TODO: is this required?
+    private List<Post> posts;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_user")
-    private List<Comment> comments = new ArrayList<Comment>(); //TODO: is this reuqired?
+    private List<Comment> comments;
 
     protected User() {
 

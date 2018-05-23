@@ -14,7 +14,7 @@ public class Comment {
     @Max(value=1000)
     private String text;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_user")
     private User user;
 

@@ -1,7 +1,9 @@
 package com.usedTrade.service;
 
+import com.usedTrade.domain.Comment;
 import com.usedTrade.domain.Post;
 import com.usedTrade.domain.User;
+import com.usedTrade.repository.CommentRepository;
 import com.usedTrade.repository.PostRepository;
 import com.usedTrade.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class UserService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     public List<User> getUsers() {
         return usersRepository.findAll();
@@ -101,6 +106,13 @@ public class UserService {
         Optional<Post> post = postRepository.findById(postId);
 
         User user = post.get().getUser();
+        return user;
+    }
+
+    public User findUserUsingCommentId(long commentId) {
+        Optional<Comment> comment = commentRepository.findById(commentId);
+
+        User user = comment.get().getUser();
         return user;
     }
 }

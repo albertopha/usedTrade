@@ -54,9 +54,21 @@ public class UserController {
         return userService.getUsersByDateOfBirth(dob);
     }
 
+    // GET user by post id
+    @RequestMapping(value="/post/{postId}", method=RequestMethod.GET)
+    public User findUserByPostId(@PathVariable("postId") long postId) {
+        return userService.findUserUsingPostId(postId);
+    }
+
+    // GET user by comment id
+    @RequestMapping(value="/comment/{commentId}", method=RequestMethod.GET)
+    public User findUserByCommentId(@PathVariable("commentId") long commentId) {
+        return userService.findUserUsingCommentId(commentId);
+    }
+
     // POST user TODO: need logic for this post method, check if requestbody works properly
     /**
-     *
+     * POST User
      * @param firstName : String
      * @param lastName : String
      * @param middleName : String || ""
@@ -75,10 +87,8 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    // PUT user TODO: need logic for put method
-
     /**
-     *
+     * UPDATE User
      * @param firstName : String || ""
      * @param lastName : String || ""
      * @param middleName : String || ""
@@ -101,14 +111,10 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    // DELETE user by id
     @RequestMapping(value="/{userId}", method=RequestMethod.DELETE)
     public void delete(@PathVariable("userId") long userId) {
         userService.deleteUser(userId);
-    }
-
-    @RequestMapping(value="/post/{postId}", method=RequestMethod.GET)
-    public User findUserByPostId(@PathVariable("postId") long postId) {
-        return userService.findUserUsingPostId(postId);
     }
 
 }
