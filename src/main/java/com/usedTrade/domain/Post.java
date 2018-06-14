@@ -28,7 +28,7 @@ public class Post {
     @OneToOne (mappedBy = "fk_post")
     private Item item;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_post")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_post", fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     @ManyToOne (fetch = FetchType.EAGER)

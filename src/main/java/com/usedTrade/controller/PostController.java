@@ -1,12 +1,12 @@
 package com.usedTrade.controller;
 
-import com.usedTrade.domain.Item;
 import com.usedTrade.domain.Post;
 import com.usedTrade.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,8 +26,32 @@ public class PostController {
         return postService.getPostById(postId);
     }
 
-    @PostMapping("/{userId}")
-    public ResponseEntity<Post> createPost(String title, String postedDate, String content, Item item, @PathVariable("userId") Long userId) {
-
+    @GetMapping("/posts/{userId}")
+    public List<Post> getPostsByUser(@PathVariable("userId") Long userId) {
+        return postService.getPostsByUser(userId);
     }
+
+    /**
+     * @param newPost
+     * @param userId
+     * @return
+     */
+    @PostMapping(value = "/{userId}")
+    public ResponseEntity<Post> createPost(@Valid @RequestBody Post newPost,
+                                           @PathVariable("userId") Long userId) {
+        Post post = postService.createPost(newPost, userId);
+        return ResponseEntity.ok(post);
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<Post> updatePost(Post postToUpdate) {
+        Post post = postService.updatePost( postToUpdate);
+        return ResponseEntity.ok(post);
+    }
+
+    @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable("postId") Long postId) {
+        postService.deletePost(postId);
+    }
+
 }

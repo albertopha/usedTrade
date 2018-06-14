@@ -26,6 +26,10 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
+    public Comment getCommentbyId(Long commentId) {
+        return commentRepository.findById(commentId).get();
+    }
+
     //TODO: Check if this works
     public List<Comment> getCommentsByPost(long postId) {
         Optional<Post> post = postRepository.findById(postId);
@@ -35,6 +39,24 @@ public class CommentService {
     public List<Comment> getCommentsByUser(long userId) {
         Optional<User> user = usersRepository.findById(userId);
         return commentRepository.getCommentByUser(user.get());
+    }
+
+    public Comment createComment(Comment comment, Long postId, Long userId) {
+        Post post = postRepository.findById(postId).get();
+        User user = usersRepository.findById(userId).get();
+
+        comment.setPost(post);
+        comment.setUser(user);
+        return commentRepository.save(comment);
+    }
+
+    public Comment updateComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    public void deleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).get();
+        commentRepository.delete(comment);
     }
 
 }

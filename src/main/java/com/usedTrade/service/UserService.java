@@ -84,7 +84,8 @@ public class UserService {
     }
 
     public User postUser(String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
-        return new User(fn, ln, mn, age, creditCard, email, dob, null, null);
+         User newUser = new User(fn, ln, mn, age, creditCard, email, dob, null, null);
+         return usersRepository.save(newUser);
     }
 
     public void updateUser(User user, String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
@@ -95,6 +96,8 @@ public class UserService {
         if(creditCard != "") user.setCreditCard(creditCard);
         if(email != "") user.setEmail(email);
         if(dob != "") user.setDateOfBirth(dob);
+
+        usersRepository.save(user);
     }
 
     public void deleteUser(long userId) {
