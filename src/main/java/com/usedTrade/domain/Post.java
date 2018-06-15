@@ -3,6 +3,8 @@ package com.usedTrade.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import javax.persistence.Id;
+
 
 /**
  * Created by albertoh on 2018-05-01.
@@ -22,17 +24,17 @@ public class Post {
 
     private String content;
 
-    @OneToMany (mappedBy = "fk_post", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "post", fetch = FetchType.EAGER)
     private List<Tag> tags;
 
-    @OneToOne (mappedBy = "fk_post")
+    @OneToOne (mappedBy = "post")
     private Item item;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_post", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_user")
+    @JoinColumn(name = "post")
     private User user;
 
     protected Post() {

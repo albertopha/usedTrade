@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("itemRepository")
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     List<Item> findByPost(Post post);
 
     //Different approach than comment and user:
-    @Query("SELECT i FROM ITEM i WHERE i.name = :name")
-    List<Item> findByName(@Param("name") String name);
+//    @Query("SELECT i FROM ITEM i WHERE i.name = :name")
+//    List<Item> findByName(@Param("name") String name);
 }

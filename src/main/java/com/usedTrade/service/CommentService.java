@@ -7,19 +7,23 @@ import com.usedTrade.repository.CommentRepository;
 import com.usedTrade.repository.PostRepository;
 import com.usedTrade.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("commentService")
 public class CommentService {
 
     @Autowired
+    @Qualifier("commentRepository")
     private CommentRepository commentRepository;
     @Autowired
+    @Qualifier("postRepository")
     private PostRepository postRepository;
     @Autowired
+    @Qualifier("userRepository")
     private UsersRepository usersRepository;
 
     public List<Comment> getAllComments() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("postRepository")
 public interface PostRepository extends JpaRepository<Post, Long> {
 //    List<Post> getPostsByUser(User user);
 

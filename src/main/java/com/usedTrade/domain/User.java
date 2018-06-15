@@ -1,14 +1,10 @@
 package com.usedTrade.domain;
 
-import org.hibernate.annotations.OnDelete;
-import org.springframework.data.annotation.Id;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import javax.persistence.Id;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +12,6 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="User")
 public class User {
 
     @Id
@@ -45,10 +40,10 @@ public class User {
     @NotNull(message="date of birth required")
     private String dateOfBirth;
 
-    @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "fk_user")
+    @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "user")
     private List<Post> posts;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "fk_user")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Comment> comments;
 
     protected User() {
