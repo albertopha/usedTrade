@@ -7,21 +7,25 @@ import com.usedTrade.repository.CommentRepository;
 import com.usedTrade.repository.PostRepository;
 import com.usedTrade.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("userService")
 public class UserService {
     @Autowired
+    @Qualifier("userRepository")
     private UsersRepository usersRepository;
 
     @Autowired
+    @Qualifier("postRepository")
     private PostRepository postRepository;
 
     @Autowired
+    @Qualifier("commentRepository")
     private CommentRepository commentRepository;
 
     public List<User> getUsers() {
@@ -83,9 +87,8 @@ public class UserService {
         return usersRepository.findByDateOfBirth(dob);
     }
 
-    public User postUser(String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
-         User newUser = new User(fn, ln, mn, age, creditCard, email, dob, null, null);
-         return usersRepository.save(newUser);
+    public User postUser(User user) {
+         return usersRepository.save(user);
     }
 
     public void updateUser(User user, String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {

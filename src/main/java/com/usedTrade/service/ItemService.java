@@ -5,17 +5,20 @@ import com.usedTrade.domain.Post;
 import com.usedTrade.repository.ItemRepository;
 import com.usedTrade.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("itemService")
 public class ItemService {
     @Autowired
+    @Qualifier("itemRepository")
     private ItemRepository itemRepository;
 
     @Autowired
+    @Qualifier("postRepository")
     private PostRepository postRepository;
 
     //TODO: test this
@@ -34,8 +37,8 @@ public class ItemService {
         return items;
     }
 
-    public List<Item> getItemsByName(String name) {
-        List<Item> items = itemRepository.findByName(name);
-        return items;
-    }
+//    public List<Item> getItemsByName(String name) {
+//        List<Item> items = itemRepository.findByName(name);
+//        return items;
+//    }
 }

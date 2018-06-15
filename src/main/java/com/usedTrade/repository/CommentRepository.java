@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("commentRepository")
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> getCommentByPost(Post post); //TODO: will this work with post object parameter? Or implement with postId?
 

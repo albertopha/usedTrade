@@ -3,6 +3,7 @@ package com.usedTrade.controller;
 import com.usedTrade.domain.Post;
 import com.usedTrade.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class PostController {
 
     @Autowired
+    @Qualifier("postService")
     private PostService postService;
 
     @GetMapping("/")

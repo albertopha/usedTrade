@@ -10,7 +10,7 @@ import java.util.List;
  * Created by albertoh on 2018-05-01.
  */
 
-@Repository
+@Repository("userRepository")
 public interface UsersRepository extends JpaRepository<User, Long> {
     List<User> findByFirstName(String name);
     List<User> findByLastName(String name);
