@@ -91,16 +91,8 @@ public class UserService {
          return usersRepository.save(user);
     }
 
-    public void updateUser(User user, String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
-        if(fn != "") user.setFirstName(fn);
-        if(ln != "") user.setLastName(ln);
-        if(mn != "") user.setMiddleName(mn);
-        if(age != -1) user.setAge(age);
-        if(creditCard != "") user.setCreditCard(creditCard);
-        if(email != "") user.setEmail(email);
-        if(dob != "") user.setDateOfBirth(dob);
-
-        usersRepository.save(user);
+    public User updateUser(User user) {
+        return usersRepository.save(user);
     }
 
     public void deleteUser(long userId) {

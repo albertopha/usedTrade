@@ -28,7 +28,7 @@ public class PostController {
         return postService.getPostById(postId);
     }
 
-    @GetMapping("/posts/{userId}")
+    @GetMapping("/users/{userId}")
     public List<Post> getPostsByUser(@PathVariable("userId") Long userId) {
         return postService.getPostsByUser(userId);
     }
@@ -46,8 +46,8 @@ public class PostController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<Post> updatePost(Post postToUpdate) {
-        Post post = postService.updatePost( postToUpdate);
+    public ResponseEntity<Post> updatePost(@Valid @RequestBody Post postUpdate) {
+        Post post = postService.updatePost(postUpdate);
         return ResponseEntity.ok(post);
     }
 

@@ -1,6 +1,8 @@
 package com.usedTrade.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -37,7 +39,6 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "post")
-    @JsonIgnore
     private User user;
 
     protected Post() {

@@ -32,9 +32,7 @@ public class PostService {
         return post.get();
     }
 
-    //TODO: see if this works
     public List<Post> getPostsByUser(Long userId) {
-//        User user = usersRepository.findById(userId).get();
         return postRepository.getPostsByUser_Id(userId);
     }
 
