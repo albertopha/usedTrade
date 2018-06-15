@@ -30,19 +30,17 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
-    public Comment getCommentbyId(Long commentId) {
+    public Comment getCommentById(Long commentId) {
         return commentRepository.findById(commentId).get();
     }
 
     //TODO: Check if this works
     public List<Comment> getCommentsByPost(long postId) {
-        Optional<Post> post = postRepository.findById(postId);
-        return commentRepository.getCommentByPost(post.get());
+        return commentRepository.getCommentsByPost_Id(postId);
     }
 
     public List<Comment> getCommentsByUser(long userId) {
-        Optional<User> user = usersRepository.findById(userId);
-        return commentRepository.getCommentByUser(user.get());
+        return commentRepository.getCommentsByUser_Id(userId);
     }
 
     public Comment createComment(Comment comment, Long postId, Long userId) {

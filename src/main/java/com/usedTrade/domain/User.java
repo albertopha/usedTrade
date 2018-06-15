@@ -45,7 +45,6 @@ public class User {
     private String dateOfBirth;
 
     @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "user")
-    @JsonIgnore
     private List<Post> posts;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")

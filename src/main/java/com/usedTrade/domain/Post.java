@@ -39,6 +39,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "post")
+    @JsonIgnore
     private User user;
 
     protected Post() {

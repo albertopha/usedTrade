@@ -1,5 +1,7 @@
 package com.usedTrade.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -27,6 +29,7 @@ public class Item {
 
     @OneToOne (cascade = CascadeType.REMOVE)
     @JoinColumn (name = "fk_post")
+    @JsonIgnore
     private Post post;
 
     protected Item() {
