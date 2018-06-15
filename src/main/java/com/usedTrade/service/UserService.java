@@ -61,7 +61,7 @@ public class UserService {
 
         firstName = nameArray[0];
 
-        if(nameArray.length == 2) {
+        if(nameArray.length <= 2) {
             lastName = nameArray[1];
         } else {
             middleName = nameArray[1];
@@ -71,8 +71,8 @@ public class UserService {
         usersWithFirstName = usersRepository.findByFirstName(firstName);
 
         for(User user: usersWithFirstName) {
-            if(user.getLastName() == lastName) {
-                if(user.getMiddleName() == middleName || middleName.length() == 0) {
+            if(lastName.equals(user.getLastName())) {
+                if("".equals(middleName)|| user.getMiddleName() == null || middleName.equals(user.getMiddleName())) {
                     usersMatching.add(user);
                 }
             }

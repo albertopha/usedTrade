@@ -41,13 +41,6 @@ public class PostService {
     public Post createPost(Post newPost, Long userId) {
         User user = usersRepository.findById(userId).get();
         newPost.setUser(user);
-
-        //TODO: check if this is necessary
-//        List<Post> userPosts = user.getPosts();
-//        userPosts.add(newPost);
-//        user.setPosts(userPosts);
-//
-//        usersRepository.save(user);
         return postRepository.save(newPost);
     }
 
