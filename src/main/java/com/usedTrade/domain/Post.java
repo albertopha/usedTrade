@@ -1,5 +1,9 @@
 package com.usedTrade.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -24,16 +28,16 @@ public class Post {
 
     private String content;
 
-    @OneToMany (mappedBy = "post", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "post")
     private List<Tag> tags;
 
     @OneToOne (mappedBy = "post")
     private Item item;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "post")
     private User user;
 

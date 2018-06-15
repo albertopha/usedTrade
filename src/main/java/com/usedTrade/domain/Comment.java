@@ -1,5 +1,7 @@
 package com.usedTrade.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,10 +18,12 @@ public class Comment {
 
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_user")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "fk_post")
+    @JsonIgnore
     private Post post;
 
     protected Comment(){}

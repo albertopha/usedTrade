@@ -61,7 +61,7 @@ public class UserService {
 
         firstName = nameArray[0];
 
-        if(nameArray.length == 2) {
+        if(nameArray.length <= 2) {
             lastName = nameArray[1];
         } else {
             middleName = nameArray[1];
@@ -71,8 +71,8 @@ public class UserService {
         usersWithFirstName = usersRepository.findByFirstName(firstName);
 
         for(User user: usersWithFirstName) {
-            if(user.getLastName() == lastName) {
-                if(user.getMiddleName() == middleName || middleName.length() == 0) {
+            if(lastName.equals(user.getLastName())) {
+                if("".equals(middleName)|| user.getMiddleName() == null || middleName.equals(user.getMiddleName())) {
                     usersMatching.add(user);
                 }
             }
@@ -91,16 +91,8 @@ public class UserService {
          return usersRepository.save(user);
     }
 
-    public void updateUser(User user, String fn, String ln, String mn, Integer age, String creditCard, String email, String dob) {
-        if(fn != "") user.setFirstName(fn);
-        if(ln != "") user.setLastName(ln);
-        if(mn != "") user.setMiddleName(mn);
-        if(age != -1) user.setAge(age);
-        if(creditCard != "") user.setCreditCard(creditCard);
-        if(email != "") user.setEmail(email);
-        if(dob != "") user.setDateOfBirth(dob);
-
-        usersRepository.save(user);
+    public User updateUser(User user) {
+        return usersRepository.save(user);
     }
 
     public void deleteUser(long userId) {

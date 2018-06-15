@@ -69,7 +69,6 @@ public class UserController {
         return userService.findUserUsingCommentId(commentId);
     }
 
-    // POST user TODO: need logic for this post method, check if requestbody works properly
     /**
      * POST User
      * @return ResponseEntity
@@ -82,26 +81,13 @@ public class UserController {
     }
 
     /**
-     * UPDATE User
-     * @param firstName : String || ""
-     * @param lastName : String || ""
-     * @param middleName : String || ""
-     * @param age : Integer || -1
-     * @param creditCard : String
-     * @param email : String || ""
-     * @param dob : String || ""
-     * @return ResponseEntity || NOT_FOUND
+     *
+     * @param updatedUser
+     * @return
      */
-    @RequestMapping(value="/{userId}", method=RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@PathVariable("userId") long userId,
-                                           @RequestBody String firstName, @RequestBody String lastName, @RequestBody(required=false) String middleName,
-                                           @RequestBody Integer age, @RequestBody String creditCard, @RequestBody(required=false) String email,
-                                           @RequestBody String dob) {
-
-        User user = userService.userById(userId);
-        if(user == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        userService.updateUser(user,firstName, lastName, middleName, age, creditCard, email, dob);
-
+    @RequestMapping(value="/", method=RequestMethod.PUT)
+    public ResponseEntity<User> updateUser(@RequestBody User updatedUser){
+        User user = userService.updateUser(updatedUser);
         return ResponseEntity.ok(user);
     }
 

@@ -1,5 +1,9 @@
 package com.usedTrade.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Id;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -41,6 +45,7 @@ public class User {
     private String dateOfBirth;
 
     @OneToMany(cascade=CascadeType.REMOVE, mappedBy = "user")
+    @JsonIgnore
     private List<Post> posts;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")

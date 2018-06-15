@@ -10,11 +10,6 @@ import java.util.List;
 
 @Repository("postRepository")
 public interface PostRepository extends JpaRepository<Post, Long> {
-//    List<Post> getPostsByUser(User user);
 
     List<Post> getPostsByUser_Id(Long userId);
-
-    // Alternative: TODO: test this
-    // @Query("SELECT POST AS p WHERE p.user.id = :userId
-    // List<Post> getPostsByUserId(@Param("userId") Long userId);
 }
