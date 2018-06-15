@@ -21,7 +21,6 @@ public class ItemService {
     @Qualifier("postRepository")
     private PostRepository postRepository;
 
-    //TODO: test this
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
@@ -32,13 +31,22 @@ public class ItemService {
     }
 
     public List<Item> getItemsByPostId(long id) {
-        Optional<Post> post = postRepository.findById(id);
-        List<Item> items = itemRepository.findByPost(post.get());
+        List<Item> items = itemRepository.getItemsByPost_Id(id);
         return items;
     }
 
-//    public List<Item> getItemsByName(String name) {
-//        List<Item> items = itemRepository.findByName(name);
-//        return items;
-//    }
+    public Item createItem(Item item, Long postId) {
+        Post post = postRepository.findById(postId).get();
+        item.setPost(post);
+
+        return itemRepository.save(item);
+    }
+
+    public Item updateItem(Item item) {
+        return itemRepository.save(item);
+    }
+
+    public void deleteItem(Long itemId) {
+        itemRepository.deleteById(itemId);
+    }
 }
