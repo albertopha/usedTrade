@@ -1,5 +1,7 @@
 package com.usedTrade.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -14,6 +16,7 @@ public class Tag {
 
     @ManyToOne
     @JoinColumn(name = "fk_post")
+    @JsonIgnore
     private Post post;
 
     protected Tag() {

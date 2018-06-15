@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -26,7 +25,7 @@ public class CommentController {
     // GET comment by commentId
     @GetMapping("/{commentId}")
     public Comment getCommentById(@PathVariable("commentId") Long commentId) {
-        return commentService.getCommentbyId(commentId);
+        return commentService.getCommentById(commentId);
     }
 
     // GET comments from postId

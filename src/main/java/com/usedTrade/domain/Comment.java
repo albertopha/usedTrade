@@ -1,6 +1,7 @@
 package com.usedTrade.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -12,8 +13,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Min(value=0)
-    @Max(value=1000)
+    @Length(min=0)
+    @Length(max=1000)
     private String text;
 
     @ManyToOne (fetch = FetchType.EAGER)
