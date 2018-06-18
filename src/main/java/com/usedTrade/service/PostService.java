@@ -36,6 +36,10 @@ public class PostService {
         return postRepository.getPostsByUser_Id(userId);
     }
 
+    public List<Post> getPostsByTag(Long tagId) {
+        return postRepository.getPostsByTag_Id(tagId);
+    }
+
     public Post createPost(Post newPost, Long userId) {
         User user = usersRepository.findById(userId).get();
         newPost.setUser(user);

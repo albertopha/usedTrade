@@ -33,6 +33,11 @@ public class PostController {
         return postService.getPostsByUser(userId);
     }
 
+    @GetMapping("/tags/{tagId}")
+    public List<Post> getPostsByTag(@PathVariable("tagId") Long tagId) {
+        return postService.getPostsByTag(tagId);
+    }
+
     /**
      * @param newPost
      * @param userId
